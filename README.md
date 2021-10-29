@@ -1,1 +1,1 @@
-# idea-board-rn
+# Idea Board React Native
