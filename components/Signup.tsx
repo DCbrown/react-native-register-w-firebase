@@ -1,29 +1,53 @@
-import React from 'react'
-import { StyleSheet, Button, View, TextInput,  Alert } from 'react-native'
-import { Actions } from 'react-native-router-flux'
+import React from 'react';
+import { StyleSheet, Button, View, TextInput} from 'react-native';
+import { Actions } from 'react-native-router-flux';
+import { Formik } from 'formik';
 
 const Signup = () => {
+
    const goToLogin = () => {
       Actions.login();
    }
    return (
       <View style = {styles.container}>
-         <TextInput 
-            style = {styles.input}
-            placeholder ='Enter Username'/>
-         <TextInput 
-            style = {styles.input}
-            placeholder ='Enter Email'/>
-         <TextInput 
-            style = {styles.input}
-            placeholder ='Enter password'
-            secureTextEntry={true}/>
-         <TextInput 
-            style = {styles.input}
-            placeholder ='Enter password again'
-            secureTextEntry={true}/>         
-         <Button onPress={() => console.log('Submit')} title = 'Sign Up' color='coral'/>   
-         <Button onPress = {() => goToLogin()}  title="Go To Login" />
+         <Formik
+            initialValues={{ username: '', email: '', password: '', passwordAgain: '' }}
+            onSubmit={values => console.log(values)}
+          >
+          {({ handleChange, handleBlur, handleSubmit, values }) => (
+            <>    
+               <TextInput 
+                  style = {styles.input}
+                  placeholder ='Enter Username'
+                  onChangeText={handleChange('username')}
+                  value={values.username}
+                  onBlur={handleBlur('username')}/>
+               <TextInput 
+                  style = {styles.input}
+                  placeholder ='Enter Email'
+                  onChangeText={handleChange('email')}
+                  value={values.email}
+                  onBlur={handleBlur('email')}
+                  keyboardType="email-address"/>
+               <TextInput 
+                  style = {styles.input}
+                  placeholder ='Enter Password'
+                  onChangeText={handleChange('password')}
+                  value={values.password}
+                  onBlur={handleBlur('password')}
+                  secureTextEntry />
+               <TextInput 
+                  style = {styles.input}
+                  placeholder ='Enter Password Again'
+                  onChangeText={handleChange('passwordAgain')}
+                  value={values.passwordAgain}
+                  onBlur={handleBlur('passwordAgain')}
+                  secureTextEntry />     
+               <Button onPress={() => handleSubmit()} title = 'Sign Up' color='coral'/>   
+               <Button onPress = {() => goToLogin()}  title="Go To Login" />
+            </>
+          )}
+         </Formik> 
       </View>
    )
 }

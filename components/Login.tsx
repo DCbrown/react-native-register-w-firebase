@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, Button, View, TextInput } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import { Formik } from 'formik';
 
 const Login = () => {
    const goToSignUp = () => {
@@ -8,15 +9,31 @@ const Login = () => {
    }
    return (
       <View style = {styles.container}>
-         <TextInput 
-            style = {styles.input}
-            placeholder ='Email'/>
-         <TextInput 
-            style = {styles.input}
-            placeholder ='Password'
-            secureTextEntry={true}/>      
-         <Button onPress={() => console.log('Submit')} title = 'Login' color='coral'/>     
-         <Button onPress = {() => goToSignUp()}  title="Go To Signup" />
+         <Formik
+            initialValues={{ email: '', password: '' }}
+            onSubmit={values => console.log(values)}
+          >
+          {({ handleChange, handleBlur, handleSubmit, values }) => (
+            <>    
+               <TextInput 
+                  style = {styles.input}
+                  placeholder ='Email'
+                  onChangeText={handleChange('email')}
+                  value={values.email}
+                  onBlur={handleBlur('email')}
+                  keyboardType="email-address"/>
+               <TextInput 
+                  style = {styles.input}
+                  placeholder ='Password'
+                  onChangeText={handleChange('password')}
+                  secureTextEntry={true}
+                  value={values.password}
+                  onBlur={handleBlur('password')}/>      
+               <Button onPress={() => handleSubmit()} title = 'Login' color='coral'/>     
+               <Button onPress = {() => goToSignUp()} title="Go To Signup" />
+            </>
+         )}
+         </Formik>
       </View>
       
    )
