@@ -5,7 +5,6 @@
         "browser": true,
         "react-native/react-native": true,
         "es6": true
-        // "node": true
     },
     "plugins": [
       "@typescript-eslint",
@@ -14,14 +13,13 @@
     "extends": [
       "eslint:recommended",
       "plugin:@typescript-eslint/eslint-recommended",
-      "plugin:@typescript-eslint/recommended"
+      "plugin:@typescript-eslint/recommended",
+      "prettier"
     ],
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
         }
-        // "ecmaVersion": 2018,
-        // "sourceType": "module"
     },
     "rules": { 
         "no-console": 2,
