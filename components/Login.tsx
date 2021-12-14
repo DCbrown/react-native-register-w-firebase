@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, Button, View, TextInput, Text } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Formik } from 'formik';
-import loginValidationSchema from './FormValidations';
+import {loginValidationSchema }from './FormValidations';
 
 const Login = () => {
    const goToSignUp = () => {
