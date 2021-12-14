@@ -1,7 +1,8 @@
 import React from 'react'
-import { StyleSheet, Button, View, TextInput } from 'react-native';
+import { StyleSheet, Button, View, TextInput, Text } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Formik } from 'formik';
+import loginValidationSchema from './FormValidations';
 
 const Login = () => {
    const goToSignUp = () => {
@@ -10,10 +11,11 @@ const Login = () => {
    return (
       <View style = {styles.container}>
          <Formik
+         validationSchema={loginValidationSchema}
             initialValues={{ email: '', password: '' }}
             onSubmit={values => console.log(values)}
           >
-          {({ handleChange, handleBlur, handleSubmit, values }) => (
+          {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
             <>    
                <TextInput 
                   style = {styles.input}
@@ -22,13 +24,19 @@ const Login = () => {
                   value={values.email}
                   onBlur={handleBlur('email')}
                   keyboardType="email-address"/>
+                  {(errors.email && touched.email) &&
+                  <Text style={styles.errorText}>{errors.email}</Text>
+                }
                <TextInput 
                   style = {styles.input}
                   placeholder ='Password'
                   onChangeText={handleChange('password')}
                   secureTextEntry={true}
                   value={values.password}
-                  onBlur={handleBlur('password')}/>      
+                  onBlur={handleBlur('password')}/>   
+                  {(errors.password && touched.password) &&
+                  <Text style={styles.errorText}>{errors.password}</Text>
+                }   
                <Button onPress={() => handleSubmit()} title = 'Login' color='coral'/>     
                <Button onPress = {() => goToSignUp()} title="Go To Signup" />
             </>
@@ -51,6 +59,9 @@ const styles = StyleSheet.create({
       flex: 1,
       padding: 40
    },
+   errorText: {
+      color:'red',
+   }
 })
 
 export default Login
