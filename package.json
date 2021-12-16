@@ -46,9 +46,9 @@
     }
   },
   "lint-staged": {
-    "**/*.tsx": [
-      "eslint --fix",
-      "git add"
+    "*.{js,jsx,ts,tsx}": [
+      "prettier --write",
+      "eslint --fix"
     ]
   },
   "private": true

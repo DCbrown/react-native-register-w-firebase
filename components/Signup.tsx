@@ -13,7 +13,8 @@ const Signup = () => {
       <Formik
         validationSchema={signUpValidationSchema}
         initialValues={{ userName: '', email: '', password: '', passwordConfirm: '' }}
-        onSubmit={(values) => console.log(values)}
+        // eslint-disable-next-line no-console
+        onSubmit={(values) => console.log(values)} //TODO: remove console replace with DB hookup
       >
         {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
           <>
