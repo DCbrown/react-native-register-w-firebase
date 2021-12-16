@@ -13,7 +13,7 @@ const Signup = () => {
       <View style = {styles.container}>
          <Formik
          validationSchema={signUpValidationSchema}
-            initialValues={{ userName: '', email: '', password: '', passwordAgain: '' }}
+            initialValues={{ userName: '', email: '', password: '', passwordConfirm: '' }}
             onSubmit={values => console.log(values)}
           >
           {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
@@ -21,10 +21,10 @@ const Signup = () => {
                <TextInput 
                   style = {styles.input}
                   placeholder ='Enter Username'
-                  onChangeText={handleChange('username')}
+                  onChangeText={handleChange('userName')}
                   value={values.userName}
                   onBlur={handleBlur('username')}/>
-                  {(errors.userName && touched.email) &&
+                  {(errors.userName && touched.userName) &&
                   <Text style={styles.errorText}>{errors.userName}</Text>
                 }
                <TextInput 
@@ -34,6 +34,9 @@ const Signup = () => {
                   value={values.email}
                   onBlur={handleBlur('email')}
                   keyboardType="email-address"/>
+                  {(errors.email && touched.email) &&
+                  <Text style={styles.errorText}>{errors.email}</Text>
+                }
                <TextInput 
                   style = {styles.input}
                   placeholder ='Enter Password'
@@ -41,13 +44,19 @@ const Signup = () => {
                   value={values.password}
                   onBlur={handleBlur('password')}
                   secureTextEntry />
+                  {(errors.password && touched.password) &&
+                  <Text style={styles.errorText}>{errors.password}</Text>
+                }
                <TextInput 
                   style = {styles.input}
                   placeholder ='Enter Password Again'
-                  onChangeText={handleChange('passwordAgain')}
-                  value={values.passwordAgain}
-                  onBlur={handleBlur('passwordAgain')}
-                  secureTextEntry />     
+                  onChangeText={handleChange('passwordConfirm')}
+                  value={values.passwordConfirm}
+                  onBlur={handleBlur('passwordConfirm')}
+                  secureTextEntry />
+                  {(errors.passwordConfirm && touched.passwordConfirm) &&
+                  <Text style={styles.errorText}>{errors.passwordConfirm}</Text>
+                }     
                <Button onPress={() => handleSubmit()} title = 'Sign Up' color='coral'/>   
                <Button onPress = {() => goToLogin()}  title="Go To Login" />
             </>

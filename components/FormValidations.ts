@@ -14,7 +14,6 @@ export const loginValidationSchema = yup.object().shape({
   export const signUpValidationSchema = yup.object().shape({
     userName: yup
       .string()
-      .matches(/(\w.).+/, 'Enter at least 2 names')
       .required('username is required'),
     email: yup
       .string()
@@ -28,7 +27,7 @@ export const loginValidationSchema = yup.object().shape({
       .matches(/[!@#$%^&*()\-_"=+{}; :,<.>]/, "Password must have a special character")
       .min(8, ({ min }) => `Password must be at least ${min} characters`)
       .required('Password is required'),
-    confirmPassword: yup
+    passwordConfirm: yup
       .string()
       .oneOf([yup.ref('password')], 'Passwords do not match')
       .required('Confirm password is required'),
