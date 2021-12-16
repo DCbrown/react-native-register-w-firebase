@@ -5,7 +5,6 @@ import { Formik } from 'formik';
 import { signUpValidationSchema } from './FormValidations';
 
 const Signup = () => {
-  console.log('testing husky');
   const goToLogin = () => {
     Actions.login();
   };
