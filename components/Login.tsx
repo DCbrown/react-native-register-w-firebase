@@ -13,6 +13,7 @@ const Login = () => {
       <Formik
         validationSchema={loginValidationSchema}
         initialValues={{ email: '', password: '' }}
+        // eslint-disable-next-line no-console
         onSubmit={(values) => console.log(values)}
       >
         {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
