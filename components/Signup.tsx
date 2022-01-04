@@ -1,20 +1,44 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, Button, View, TextInput, Text } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Formik } from 'formik';
 import { signUpValidationSchema } from './FormValidations';
+import { auth } from '../firebase/config'
 
 const Signup = () => {
   const goToLogin = () => {
     Actions.login();
   };
+
+  const handleSignUp = (email: string, password: string) => {
+    auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((userCredentials: { user: any; }) => {
+        const user = userCredentials.user;
+        // eslint-disable-next-line no-console
+        console.log('Registered with:', user.email);
+      })
+      .catch((error: { message: any; }) => alert(error.message))
+  }
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user: any) => {
+      if (user) {
+        // eslint-disable-next-line no-console
+        console.log(user)
+      }
+    })
+
+    return unsubscribe
+  }, [])
+
+  
   return (
     <View style={styles.container}>
       <Formik
         validationSchema={signUpValidationSchema}
         initialValues={{ userName: '', email: '', password: '', passwordConfirm: '' }}
-        // eslint-disable-next-line no-console
-        onSubmit={(values) => console.log(values)} //TODO: remove console replace with DB hookup
+        onSubmit={(values) => handleSignUp(values.email, values.password)}
       >
         {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
           <>
