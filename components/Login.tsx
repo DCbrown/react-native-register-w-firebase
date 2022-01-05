@@ -7,6 +7,7 @@ import { loginValidationSchema } from './FormValidations';
 const Login = () => {
   const goToSignUp = () => {
     Actions.signup();
+    console.log('test husky');
   };
   return (
     <View style={styles.container}>
