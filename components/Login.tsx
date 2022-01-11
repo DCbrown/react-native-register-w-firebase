@@ -1,20 +1,43 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, Button, View, TextInput, Text } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Formik } from 'formik';
 import { loginValidationSchema } from './FormValidations';
+import { auth } from '../firebase/config';
 
 const Login = () => {
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        Actions.homepage();
+      }
+    });
+
+    return unsubscribe;
+  }, []);
+
   const goToSignUp = () => {
     Actions.signup();
   };
+
+  const handleLogin = (email: string, password: string) => {
+    auth
+      .signInWithEmailAndPassword(email, password)
+      .then((userCredentials) => {
+        const user = userCredentials.user;
+        //TODO: console log for now but eventually pass to homepage component
+        // eslint-disable-next-line no-console
+        console.log('Logged in with:', user?.email);
+      })
+      .catch((error) => alert(error.message));
+  };
+
   return (
     <View style={styles.container}>
       <Formik
         validationSchema={loginValidationSchema}
         initialValues={{ email: '', password: '' }}
-        // eslint-disable-next-line no-console
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(login) => handleLogin(login.email, login.password)}
       >
         {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
           <>
