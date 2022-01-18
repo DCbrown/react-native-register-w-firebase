@@ -1,11 +1,15 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
+import Header from './Header';
 
 const HomePage = () => {
   return (
-    <View style={styles.container}>
-      <Text>HomePage!</Text>
-    </View>
+    <>
+      <Header/>
+      <View style={styles.container}>
+        <Text>HomePage!</Text>
+      </View>
+    </>
   );
 };
 
