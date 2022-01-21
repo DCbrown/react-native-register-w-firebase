@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, Button, View, TextInput, Text } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Formik } from 'formik';
 import { loginValidationSchema } from './FormValidations';
 import { auth } from '../firebase/config';
+import { TextInput, Button } from 'react-native-paper';
 
 const Login = () => {
   useEffect(() => {
@@ -42,27 +43,42 @@ const Login = () => {
         {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
           <>
             <TextInput
-              style={styles.input}
+              mode="outlined"
+              label="Email"
               placeholder="Email"
-              onChangeText={handleChange('email')}
+              right={<TextInput.Affix />}
               value={values.email}
               onBlur={handleBlur('email')}
-              keyboardType="email-address"
+              onChangeText={handleChange('email')}
             />
             {errors.email && touched.email && <Text style={styles.errorText}>{errors.email}</Text>}
             <TextInput
-              style={styles.input}
-              placeholder="Password"
-              onChangeText={handleChange('password')}
-              secureTextEntry={true}
+              mode="outlined"
+              label="Password"
+              secureTextEntry
+              right={<TextInput.Icon name="eye" />}
               value={values.password}
-              onBlur={handleBlur('password')}
+              onChangeText={handleChange('password')}
             />
             {errors.password && touched.password && (
               <Text style={styles.errorText}>{errors.password}</Text>
             )}
-            <Button onPress={() => handleSubmit()} title="Login" color="coral" />
-            <Button onPress={() => goToSignUp()} title="Go To Signup" />
+            <Button
+              style={[styles.btn, styles.loginBtn]}
+              contentStyle={styles.btnContent}
+              mode="contained"
+              onPress={() => handleSubmit()}
+            >
+              <Text>login</Text>
+            </Button>
+            <Button
+              style={styles.btn}
+              contentStyle={styles.btnContent}
+              mode="outlined"
+              onPress={() => goToSignUp()}
+            >
+              <Text>Signup</Text>
+            </Button>
           </>
         )}
       </Formik>
@@ -71,19 +87,18 @@ const Login = () => {
 };
 
 const styles = StyleSheet.create({
-  input: {
-    marginBottom: 10,
-    paddingHorizontal: 8,
-    paddingVertical: 6,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ddd',
-  },
   container: {
     flex: 1,
     padding: 40,
   },
   errorText: {
     color: 'red',
+  },
+  loginBtn: {
+    marginTop: 20,
+  },
+  btnContent: {
+    height: 50,
   },
 });
 
