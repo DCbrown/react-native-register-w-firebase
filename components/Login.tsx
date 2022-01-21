@@ -46,7 +46,7 @@ const Login = () => {
               mode="outlined"
               label="Email"
               placeholder="Email"
-              right={<TextInput.Affix />}
+              autoComplete={false}
               value={values.email}
               onBlur={handleBlur('email')}
               onChangeText={handleChange('email')}
@@ -55,6 +55,7 @@ const Login = () => {
             <TextInput
               mode="outlined"
               label="Password"
+              autoComplete={false}
               secureTextEntry
               right={<TextInput.Icon name="eye" />}
               value={values.password}
@@ -64,19 +65,14 @@ const Login = () => {
               <Text style={styles.errorText}>{errors.password}</Text>
             )}
             <Button
-              style={[styles.btn, styles.loginBtn]}
+              style={styles.loginBtn}
               contentStyle={styles.btnContent}
               mode="contained"
               onPress={() => handleSubmit()}
             >
               <Text>login</Text>
             </Button>
-            <Button
-              style={styles.btn}
-              contentStyle={styles.btnContent}
-              mode="outlined"
-              onPress={() => goToSignUp()}
-            >
+            <Button contentStyle={styles.btnContent} mode="outlined" onPress={() => goToSignUp()}>
               <Text>Signup</Text>
             </Button>
           </>
