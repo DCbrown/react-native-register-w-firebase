@@ -1,14 +1,16 @@
 import React from 'react';
 import { Text } from 'react-native';
-import { BottomNavigation, Button } from 'react-native-paper';
+import { BottomNavigation } from 'react-native-paper';
+import ProjectCard from './ProjectCard';
+import UserProfile from './UserProfile';
 
-const activitiesRoute = () => <Text>Activities Page</Text>;
+const activitiesRoute = () => <ProjectCard />;
 
 const exploreRoute = () => <Text>Explore Page</Text>;
 
 const inboxRoute = () => <Text>Inbox page</Text>;
 
-const profileRoute = () => <Text>Profile page</Text>;
+const profileRoute = () => <UserProfile />;
 
 const BottomNav = () => {
   const [index, setIndex] = React.useState(0);

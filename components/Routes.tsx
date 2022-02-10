@@ -4,6 +4,7 @@ import { StyleSheet } from 'react-native';
 import Login from './Login';
 import Signup from './Signup';
 import HomePage from './HomePage';
+import UserProfile from './UserProfile';
 
 const Routes = () => (
   <Router>
