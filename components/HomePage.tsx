@@ -8,7 +8,6 @@ const HomePage = () => {
   return (
     <>
       {/* <Header /> */}
-      <ProjectCard />
       <BottomNav />
     </>
   );
