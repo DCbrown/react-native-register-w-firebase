@@ -3,13 +3,12 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyARYiZvNAnRGW9BVbdfao9GbmAa4n1DI7k",
-    authDomain: "idea-board-32a76.firebaseapp.com",
-    databaseURL: "https://idea-board-32a76-default-rtdb.firebaseio.com",
-    projectId: "idea-board-32a76",
-    storageBucket: "idea-board-32a76.appspot.com",
-    messagingSenderId: "634153339703",
-    appId: "1:634153339703:web:6681e32e61ac13e6cd68b2"
+  apiKey: "AIzaSyDhLNv8b_WKeeFol171AhTb1m8V-YuiHnA",
+  authDomain: "react-native-login-7ae93.firebaseapp.com",
+  projectId: "react-native-login-7ae93",
+  storageBucket: "react-native-login-7ae93.appspot.com",
+  messagingSenderId: "92371874884",
+  appId: "1:92371874884:web:6aea3000d26079e9537811"
 };
 
 let app;
